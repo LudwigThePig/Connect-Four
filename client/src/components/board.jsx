@@ -31,40 +31,75 @@ class Board extends React.Component{
 
   checkForWin() {
     const board = this.state.discs;
-
     let count = 1;
+
+    //Winning Conditions
     const horizontal = (disc, i) => {
       if (board[i+1] === disc) {
         count++;
-        console.log(count);
         if (count === 4) {
+          console.log('horiz')
           return true;
         }
+        return horizontal(disc, i + 1)
       } else {
-        return count = 1;
+        count = 1;
+        return; 
       }
     }
     const vertical = (disc, i) => {
       if (board[i+7]=== disc) {
         count++;
-        console.log(count);
-        if (count === 4) {
+        if (count >= 4) {
+          console.log('vert')
           return true;
         }
+        return vertical(disc, i+7)
       } else {
-        return count = 1;
+        count = 1;
+        return; 
+      }
+    }
+    const major = (disc, i) => {
+      let coords = this.indexToCoord(i); //{x: x, y: y}
+      if (coords.x > 0) {
+        if (board[i+8]=== disc) {
+          count++;
+          if (count >= 4) {
+            console.log('major')
+            return true;
+          }
+          return major(disc, i+8)
+        } else {
+          count = 1;
+          return; 
+        }
+      }
+    }
+    const minor = (disc, i) => {
+      let coords = this.indexToCoord(i); //{x: x, y: y}
+      if (coords.x < 6) {
+        if (board[i+6]=== disc) {
+          count++;
+          if (count >= 4) {
+            console.log('minor')
+            return true;
+          }
+          return minor(disc, i+6)
+        } else {
+          count = 1;
+          return; 
+        }
       }
     }
 
 
-    //Checking each function;
+    //Checking for with each condition
     board.forEach((disc, index) => {
       if (disc !== undefined) {
-        // let res = 
-        let res = [horizontal(disc, index), vertical(disc, index)]//.some(test => test);
-        console.log(res);
-        if (horizontal(disc, index)){
-          console.log('winner is ', disc)
+        let res = [horizontal(disc, index), vertical(disc, index), major(disc, index), minor(disc, index)].some(test => test===true);
+        if (res){
+          console.log('Winner Winner, chicken dinner!', disc)
         }
       }
     });
