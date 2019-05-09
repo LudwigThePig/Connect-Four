@@ -59,3 +59,22 @@ h1, h2 {
 .red {
   background: #711800;
 }
+
+#gameOver {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#gameOver h1 {
+  font-weight: 700;
+  font-size: 3em;
+}

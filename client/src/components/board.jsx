@@ -1,12 +1,25 @@
 import React from 'react';
 import Disc from './disc.jsx';
 import ScoreBoard from './scoreboard.jsx';
+import GameOver from './gameOver.jsx';
+
 
 
 class Board extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      gameOver: true,
+      player1: {
+        name: 'red',
+        color: 'red',
+        wins: 0
+      },
+      player2: {
+        name: 'blue',
+        color: 'blue',
+        wins: 0
+      },
       currentPlayer: 'red',
       discs: Array.apply(null, Array(42)).map( (x, i) =>  undefined) 
     }
@@ -49,7 +62,9 @@ class Board extends React.Component{
         // [Horizontal win, vertical win, major diagonal win, minor diagonal win]
         let res = [recurse(disc, index, 1), recurse(disc, index, 6), recurse(disc, index, 7), recurse(disc, index, 8)];
         if (res.some(res => res === true)){
-          console.log('Winner Winner, chicken dinner!', disc)
+          this.setState({
+            gameOver: true
+          });
         }
       }
     });
@@ -94,6 +109,14 @@ class Board extends React.Component{
     return (
       <div>
         <ScoreBoard currentPlayer={this.state.currentPlayer} />
+
+        {this.state.gameOver ? 
+          <GameOver 
+            winner={this.state.currentPlayer === 'red' ? this.state.player1 : this.state.player2} 
+            color={this.state.currentColor} 
+            />
+          : null}
+
         <div id="board">
           {this.state.discs.map( (disc, index) => 
             <Disc
@@ -105,6 +128,7 @@ class Board extends React.Component{
             />
             )}
         </div>
+        
       </div>
     )
   } 
