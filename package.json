@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "mysql2": "^1.6.5",
+    "nodemon": "^1.19.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "sequelize": "^5.8.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
