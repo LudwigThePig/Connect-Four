@@ -27,5 +27,13 @@ body{
 }
 
 .hovered{
-  background: red;
+  background: #777;
+}
+
+.blue{
+  background: #1c5d99 !important;
+}
+
+.red{
+  background: #711800
 }

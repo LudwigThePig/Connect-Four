@@ -5,6 +5,7 @@ class Board extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      currentPlayer: 'red',
       discs: Array.apply(null, Array(42)).map( (x, i) =>  undefined) 
     }
     this.indexToCoord = this.indexToCoord.bind(this);
@@ -17,7 +18,9 @@ class Board extends React.Component{
     const y = Math.floor(index / 7);
     return {x: x, y: y}
   }
-
+  coordsToIndex(x, y) {
+    return Number(y) * 7 + Number(x);
+  }
   // handleHover = (e) => {
   //   console.log(e);
   // }
@@ -41,18 +44,26 @@ class Board extends React.Component{
 
 
   dropPiece(e) {
-    // console.log(e);
+    const piece = e.target;
+    const index = this.coordsToIndex(piece.dataset.x, piece.dataset.y);
+    let newDiscs = [...this.state.discs];
+    newDiscs[index] = this.state.currentPlayer;
+    this.setState({
+      discs: newDiscs
+    });
+
   }
 
   render() {
-    console.log(this.state.discs)
     return (
       <div id="board">
         {this.state.discs.map( (disc, index) => 
-          <Disc 
+          <Disc
+            player={disc}
             coords={this.indexToCoord(index)} 
             handleHover={this.handleHover}
             dropPiece={this.dropPiece}
+            key={`disc${index}`}
           />
         )}
       </div>
