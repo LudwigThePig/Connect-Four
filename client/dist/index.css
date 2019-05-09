@@ -1,15 +1,27 @@
+/* 
+Additional colors :)
+#639FAB
+#1c5d99
+*/
+
+body{
+  background: #639FAB;
+}
+
 #board{
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);;
-  background: black;
-  width: 70vw;
-  height: 70vh;
+  background: #222;
+  width: 500px;
+  height: 500px;
+  padding: 20px;
 }
 
 .disc{
   border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  background: white;
+  width: 90%;
+  height: 90%;
+  background: #eee;
 }

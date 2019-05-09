@@ -1,10 +1,8 @@
 import React from 'react';
 
 const Disc = (props) => {
-  console.log(props);
   return (
-    <div className="disc" data-coord>
-      DISC
+    <div className="disc" data-x={props.coords.x}  data-y={props.coords.y} data-coord>
     </div>
   )
 }
