@@ -28,6 +28,48 @@ class Board extends React.Component{
   // dropPiece = (e) => {
   //   console.log(e);
   // }
+
+  checkForWin() {
+    const board = this.state.discs;
+
+    let count = 1;
+    const horizontal = (disc, i) => {
+      if (board[i+1] === disc) {
+        count++;
+        console.log(count);
+        if (count === 4) {
+          return true;
+        }
+      } else {
+        return count = 1;
+      }
+    }
+    const vertical = (disc, i) => {
+      if (board[i+7]=== disc) {
+        count++;
+        console.log(count);
+        if (count === 4) {
+          return true;
+        }
+      } else {
+        return count = 1;
+      }
+    }
+
+
+    //Checking each function;
+    board.forEach((disc, index) => {
+      if (disc !== undefined) {
+        // let res = 
+        let res = [horizontal(disc, index), vertical(disc, index)]//.some(test => test);
+        console.log(res);
+        if (horizontal(disc, index)){
+          console.log('winner is ', disc)
+        }
+      }
+    });
+  }
+
   handleHover(e) {
     const xCoord = e.target.dataset.x;
     let cols = [...document.getElementsByClassName('disc')].filter(disc => disc.dataset.x === xCoord)
@@ -57,11 +99,10 @@ class Board extends React.Component{
         y--;
       }
     }
-
     this.setState({
       currentPlayer: this.state.currentPlayer === 'red' ? 'blue' : 'red',
       discs: newDiscs
-    });
+    }, (_=>this.checkForWin()))
   }
 
   render() {
