@@ -1,10 +1,11 @@
 import React from 'react';
+import GameBoard from './board.jsx';
 
 class App extends React.Component {
   render() {
     return(
       <div>
-        'Hello React World!'
+        <GameBoard />
       </div>
     )
   }
