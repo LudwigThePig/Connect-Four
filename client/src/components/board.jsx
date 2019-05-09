@@ -9,7 +9,7 @@ class Board extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      gameOver: true,
+      gameOver: false,
       player1: {
         name: 'red',
         color: 'red',
@@ -21,11 +21,12 @@ class Board extends React.Component{
         wins: 0
       },
       currentPlayer: 'red',
-      discs: Array.apply(null, Array(42)).map( (x, i) =>  undefined) 
+      discs: Array.apply(null, Array(42)).map( (x) =>  undefined) 
     }
     this.indexToCoord = this.indexToCoord.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.dropPiece = this.dropPiece.bind(this);
+    this.newGame = this.newGame.bind(this);
   }
 
   indexToCoord(index) {
@@ -46,6 +47,8 @@ class Board extends React.Component{
       if (board[idx + inc] === disc) {
         count++;
         if (count === 4) {
+          count = 1;
+          console.log('win?')
           return true;
         }
         return recurse(disc, idx + inc, inc)
@@ -62,6 +65,7 @@ class Board extends React.Component{
         // [Horizontal win, vertical win, major diagonal win, minor diagonal win]
         let res = [recurse(disc, index, 1), recurse(disc, index, 6), recurse(disc, index, 7), recurse(disc, index, 8)];
         if (res.some(res => res === true)){
+          console.log(this.state.discs)
           this.setState({
             gameOver: true
           });
@@ -104,6 +108,14 @@ class Board extends React.Component{
       discs: newDiscs
     }, (_=>this.checkForWin()))
   }
+  newGame(e) {
+    e.preventDefault();
+    let newDiscs = this.state.discs.map(i => i = null)
+    this.setState({
+      gameOver: false,
+      discs: [...this.state.discs].map(i => undefined)
+    })
+  }
 
   render() {
     return (
@@ -113,7 +125,8 @@ class Board extends React.Component{
         {this.state.gameOver ? 
           <GameOver 
             winner={this.state.currentPlayer === 'red' ? this.state.player1 : this.state.player2} 
-            color={this.state.currentColor} 
+            color={this.state.currentColor}
+            newGame={this.newGame}
             />
           : null}
 
@@ -128,7 +141,7 @@ class Board extends React.Component{
             />
             )}
         </div>
-        
+
       </div>
     )
   } 
