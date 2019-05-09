@@ -6,9 +6,31 @@ Additional colors :)
 
 body{
   background: #639FAB;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+h1, h2 {
+  font-weight: 300;
+  margin: 5px;
 }
 
-#board{
+#scoreboard {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.blue-text {
+  color: #1c5d99 !important;
+}
+
+.red-text{
+  color: #711800;
+}
+
+#board {
   margin: auto;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -19,21 +41,21 @@ body{
   padding: 20px;
 }
 
-.disc{
+.disc {
   border-radius: 50%;
   width: 90%;
   height: 90%;
   background: #eee;
 }
 
-.hovered{
+.hovered {
   background: #777;
 }
 
-.blue{
+.blue {
   background: #1c5d99 !important;
 }
 
-.red{
-  background: #711800
+.red {
+  background: #711800;
 }

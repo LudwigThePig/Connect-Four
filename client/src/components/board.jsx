@@ -1,5 +1,7 @@
 import React from 'react';
 import Disc from './disc.jsx';
+import ScoreBoard from './scoreboard.jsx';
+
 
 class Board extends React.Component{
   constructor(props) {
@@ -21,18 +23,12 @@ class Board extends React.Component{
   coordsToIndex(x, y) {
     return Number(y) * 7 + Number(x);
   }
-  // handleHover = (e) => {
-  //   console.log(e);
-  // }
-
-  // dropPiece = (e) => {
-  //   console.log(e);
-  // }
 
   checkForWin() {
     const board = this.state.discs;
     let count = 1;
-    //Winning Conditions
+
+    //Recursively search ahead for a win
     const recurse = (disc, idx, inc) => {
       if (board[idx + inc] === disc) {
         count++;
@@ -46,11 +42,12 @@ class Board extends React.Component{
       }
     }
 
-    //Checking for with each condition
+    //Check each node
     board.forEach((disc, index) => {
+      //if there is a disc, test for win in each direction
       if (disc !== undefined) {
-        let res = [recurse(disc, index, 1), recurse(disc, index, 6), recurse(disc, index, 7), recurse(disc, index, 8)]//[horizontal(disc, index), vertical(disc, index), major(disc, index), minor(disc, index)].some(test => test===true);
-        console.log(res)
+        // [Horizontal win, vertical win, major diagonal win, minor diagonal win]
+        let res = [recurse(disc, index, 1), recurse(disc, index, 6), recurse(disc, index, 7), recurse(disc, index, 8)];
         if (res.some(res => res === true)){
           console.log('Winner Winner, chicken dinner!', disc)
         }
@@ -95,16 +92,19 @@ class Board extends React.Component{
 
   render() {
     return (
-      <div id="board">
-        {this.state.discs.map( (disc, index) => 
-          <Disc
+      <div>
+        <ScoreBoard currentPlayer={this.state.currentPlayer} />
+        <div id="board">
+          {this.state.discs.map( (disc, index) => 
+            <Disc
             player={disc}
             coords={this.indexToCoord(index)} 
             handleHover={this.handleHover}
             dropPiece={this.dropPiece}
             key={`disc${index}`}
-          />
-        )}
+            />
+            )}
+        </div>
       </div>
     )
   } 
