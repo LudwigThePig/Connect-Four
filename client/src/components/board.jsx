@@ -110,11 +110,11 @@ class Board extends React.Component{
   }
   newGame(e) {
     e.preventDefault();
-    let newDiscs = this.state.discs.map(i => i = null)
     this.setState({
       gameOver: false,
       discs: [...this.state.discs].map(i => undefined)
-    })
+    });
+    this.props.results.post();
   }
 
   render() {
