@@ -44,10 +44,24 @@ class Board extends React.Component{
 
 
   dropPiece(e) {
-    const piece = e.target;
-    const index = this.coordsToIndex(piece.dataset.x, piece.dataset.y);
+    const x = e.target.dataset.x;
+    let y = 5;
+    let index;
     let newDiscs = [...this.state.discs];
-    newDiscs[index] = this.state.currentPlayer;
+    while (y  !== 0) {
+      index = this.coordsToIndex(x, y)
+      console.log(index);
+      if (this.state.discs[index] === undefined) {
+        newDiscs[index] = this.state.currentPlayer;
+        break;
+      } else {
+        y--;
+      }
+    }
+    //figure out where we can drop the piece
+    //get that index
+    // const index = this.coordsToIndex(x, y);
+    //update state
     this.setState({
       discs: newDiscs
     });
