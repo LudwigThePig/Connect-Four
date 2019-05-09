@@ -48,9 +48,8 @@ class Board extends React.Component{
     let y = 5;
     let index;
     let newDiscs = [...this.state.discs];
-    while (y  !== 0) {
+    while (y  > -1) {
       index = this.coordsToIndex(x, y)
-      console.log(index);
       if (this.state.discs[index] === undefined) {
         newDiscs[index] = this.state.currentPlayer;
         break;
@@ -58,14 +57,11 @@ class Board extends React.Component{
         y--;
       }
     }
-    //figure out where we can drop the piece
-    //get that index
-    // const index = this.coordsToIndex(x, y);
-    //update state
+
     this.setState({
+      currentPlayer: this.state.currentPlayer === 'red' ? 'blue' : 'red',
       discs: newDiscs
     });
-
   }
 
   render() {
