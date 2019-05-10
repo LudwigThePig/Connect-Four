@@ -8,13 +8,17 @@ class App extends React.Component {
     this.getResults = this.getResults.bind(this);
     this.postResults = this.postResults.bind(this);
   }
-  postResults() {
+  postResults(board, winner) {
+    const body = {
+      "board": board,
+      "winner": winner
+    }
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({'question' : 'do you liek turtles?'})
+      body: JSON.stringify(body)
     }
     return fetch('/results', options)
       .then(res => res.json())

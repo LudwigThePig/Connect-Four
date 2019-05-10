@@ -110,11 +110,12 @@ class Board extends React.Component{
   }
   newGame(e) {
     e.preventDefault();
+    const winner = this.state.currentPlayer === 'red' ? this.state.player2 : this.state.player1;
+    this.props.results.post(this.state.discs, winner);
     this.setState({
       gameOver: false,
       discs: [...this.state.discs].map(i => undefined)
     });
-    this.props.results.post();
   }
 
   render() {
