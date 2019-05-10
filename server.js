@@ -13,8 +13,8 @@ app.get('/results', (req, res, next) => {
 
 app.post('/results', (req, res, next) => {
   const row = {
-    name: req.body.winner.name,
-    color: req.body.winner.name
+    name: req.body.winner.name, 
+    color: req.body.winner.name 
   }
   db.create(row);
   res.json({'message': 'i like turtles'});

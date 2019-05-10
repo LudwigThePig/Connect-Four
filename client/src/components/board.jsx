@@ -11,12 +11,12 @@ class Board extends React.Component{
     this.state = {
       gameOver: false,
       player1: {
-        name: 'red',
+        name: this.props.players.red,
         color: 'red',
         wins: 0
       },
-      player2: {
-        name: 'blue',
+      player2: {          
+        name: this.props.players.blue,
         color: 'blue',
         wins: 0
       },
@@ -121,7 +121,10 @@ class Board extends React.Component{
   render() {
     return (
       <div>
-        <ScoreBoard currentPlayer={this.state.currentPlayer} />
+        <ScoreBoard 
+          currentPlayer={this.state.currentPlayer} 
+          players={[this.state.player1, this.state.player2]}
+        />
 
         {this.state.gameOver ? 
           <GameOver 

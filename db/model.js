@@ -5,15 +5,15 @@ const sequelize = new Sequelize('connect4', 'root', '', {
   dialect: 'mysql'
 });
 
-const User = sequelize.define('users', {
+const User = sequelize.define('user', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  name: Sequelize.STRING(20),
+  namess: Sequelize.STRING(20),
   color: Sequelize.STRING(20)
-})
+});
 
 User.sync();
 
