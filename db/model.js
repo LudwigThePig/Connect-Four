@@ -5,7 +5,7 @@ const sequelize = new Sequelize('connect4', 'root', '', {
   dialect: 'mysql'
 });
 
-const User = sequelize.define('user', {
+const User = sequelize.define('users', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -21,4 +21,4 @@ sequelize.authenticate()
   .then(() => console.log('Houston, we have a connection'))
   .catch(err => console.log(err));
 
-module.export = User;
+module.exports = User;
